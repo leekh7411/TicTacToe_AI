@@ -116,7 +116,7 @@ class TicTacToeSingle:
             print(_stone,end =_end)
 
 
-    def get_MonteCarloReward(self):
+    def get_reward(self):
         reward = 0
 
         self.GameOver = False
@@ -136,71 +136,13 @@ class TicTacToeSingle:
             #self.__printBoard__()
             return reward
 
-        """
-        # Random Simulation
-        episodes = 10000
-        self.__printBoard__()
-        current_player = 1
-        current_player_win_count = 0
-        another_player = -1
-        another_player_win_count = 0
-        draw_game_count = 0
-        for e in range(episodes):
-            board = self.__getCopiedBoard()
-            board = self.__getTurnChangedBoard__(board)
-            turn = -1 # another player
-            game_over = False
-            # 1 : Current Player
-            # 0 : None
-            #-1 : Another Player
-            while not game_over:
-                # Get Action randomly
-                action_list = []
-                for i in range(board.__len__()):
-                    if board[i] == 0:
-                        action_list.append(i)
-                action_idx = random.randrange(action_list.__len__())
-                _action =  action_list[action_idx]
-
-                if self.__actionAvail__(board, _action):
-                    board[_action] = turn
-                    turn *= -1
-
-                if self.__checkFull__(board):
-                    game_over = True
-
-                win_state =  self.__checkWin__(board)
-                if win_state != 0:
-                    game_over = True
-
-                if game_over:break
-
-                #self.__changeBoardTurn__(board)
-
-
-            if win_state == current_player:
-                reward += 1
-                current_player_win_count += 1
-            elif win_state == another_player:
-                reward -= 1
-                another_player_win_count += 1
-            else:
-                draw_game_count += 1
-
-        print("MTCPredict(Win/Loss/Draw/Reward):",
-              current_player_win_count,
-              another_player_win_count,
-              draw_game_count,reward)
-        print("===========================================")
-        """
-
         return reward
 
     def __step__(self,action):
         # Always 1 is The Agent
         self.Board[action] = 1
-        # Get Reward from MTC-Predict
-        reward = self.get_MonteCarloReward()
+        # Get Reward. this checks only final state
+        reward = self.get_reward()
         # return <next_state,reward,done>
         return self.Board,reward,self.GameOver
 
