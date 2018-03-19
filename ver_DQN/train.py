@@ -2,8 +2,8 @@ import numpy as np
 import pylab
 from copy import deepcopy
 
-from DQN_version.TicTacToe import TicTacToeSingle
-from DQN_version.agent import Agent_DQN
+from ver_DQN.TicTacToe import TicTacToeSingle
+from ver_DQN.agent import Agent_DQN
 A = 1
 B = -1
 EPISODE_NUM = 100
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     state_size = env.state_size
     action_size = env.action_size
     # init Agent
-    agentA = Agent_DQN(state_size=state_size,action_size=action_size)
+    agentA = Agent_DQN(state_size=state_size,action_size=action_size,load_model=True)
     agentB = Agent_DQN(state_size=state_size,action_size=action_size)
 
     scoresA = []
@@ -121,7 +121,7 @@ if __name__ == "__main__":
                 pylab.plot(episodesA,scoresA,'b')
                 pylab.savefig("./save_graph/tictactoe_dqnA.png")
 
-                pylab.plot(episodesB, scoresB, 'b')
+                pylab.plot(episodesB, scoresB, 'r')
                 pylab.savefig("./save_graph/tictactoe_dqnB.png")
 
                 print("episode:",e," score A:",scoreA," score B:",scoreB,

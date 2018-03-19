@@ -1,8 +1,8 @@
 import numpy as np
 import pylab
 
-from DQN_version.TicTacToe import TicTacToeSingle
-from DQN_version.agent import Agent_DQN
+from ver_DQN.TicTacToe import TicTacToeSingle
+from ver_DQN.agent import Agent_DQN
 
 if __name__ == "__main__":
     # init TTT Environment
